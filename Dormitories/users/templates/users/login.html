@@ -1,9 +1,5 @@
-{% extends 'hostels/layout.html' %}
-{% block title %} {{ Login }} page {% endblock %}
-{% block content %}
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" href="{% static 'users/css/main.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -32,6 +28,13 @@
 
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                             </form>
+
+
+                        </div>
+                        <div>
+                            <p class="mb-0">Don't have an account? <a href="/register"
+                                                                      class="text-white-50 fw-bold">Sign Up</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -40,4 +43,3 @@
     </div>
 </section>
 </body>
-{% endblock %}
