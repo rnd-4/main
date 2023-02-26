@@ -48,12 +48,12 @@ def userPage(request):
         'lastname': lastname,
         'email': email,
     }
-    return render(request, 'user/userpage.html', data)
+    return render(request, 'users/userpage.html', data)
 
 
 class LoginUser(LoginView):
     form_class = LoginUserForm
-    template_name = 'user/login.html'
+    template_name = 'users/login.html'
 
     def get_success_url(self):
         return reverse_lazy('Userpage')
@@ -61,7 +61,7 @@ class LoginUser(LoginView):
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
-    template_name = 'user/register.html'
+    template_name = 'users/register.html'
     success_url = reverse_lazy('login')
 
 
