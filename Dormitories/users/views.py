@@ -48,7 +48,7 @@ def userPage(request):
         'lastname': lastname,
         'email': email,
     }
-    return render(request, 'user/user_page.html', data)
+    return render(request, 'user/userpage.html', data)
 
 
 class LoginUser(LoginView):
