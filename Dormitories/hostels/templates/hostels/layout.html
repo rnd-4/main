@@ -1,6 +1,4 @@
 {% load static %}
-{% load render_bundle from webpack_loader %}
-{% render_bundle 'main' %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,7 +18,7 @@
     <link href="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
 
-    <link rel="stylesheet" href="{% static 'associate/css/main.css' %}">
+<!--    <link rel="stylesheet" href="{% static 'associate/css/main.css' %}">-->
 
 </head>
 <body>
@@ -28,8 +26,8 @@
         <h3>Navbar</h3>
         <ul>
             <a href="{% url 'mainpage' %}"><li>Main</li></a>
-            <a href="{% url 'dormitorie' %}"><li>Dormitorie</li></a>
-            <a href="{% url 'userpage' %}"><li>User</li></a>
+            <a href="#"><li>Dormitorie</li></a>
+            <a href="#"><li>User</li></a>
         </ul>
     </aside>
 
