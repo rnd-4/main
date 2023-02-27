@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-xl-6 col-md-6">
                       <label for="yourName" class="form-label">Прізвище</label>
-                      <input type="text" name="name" class="form-control" id="yourLastName" required>
+                      <input type="text" name="lastname" class="form-control" id="yourLastName" required>
                       <div class="invalid-feedback">Будь ласка, введи своє прізвище!</div>
                     </div>
 
@@ -125,11 +125,11 @@
                     </div>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Логін</label>
+                      <label for="yourUsername" class="form-label">Номер студентського</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Вигадай логін.</div>
+<!--                        <span class="input-group-text" id="inputGroupPrepend">@</span>-->
+                        <input type="text" placeholder="012345..." name="username" class="form-control" id="yourUsername" required>
+                        <div class="invalid-feedback">Введи номер студентського.</div>
                       </div>
                     </div>
 
@@ -150,7 +150,7 @@
                       <button class="btn btn-primary w-100" type="submit">Зареєструватися</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Вже зареєстрований(a)? <a href="/login?next=/userpage">Увійти</a></p>
+                      <p class="small mb-0">Вже маєш аккаунт? <a href="/login?next=/userpage">Увійти</a></p>
                     </div>
                   </form>
 
