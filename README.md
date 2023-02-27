@@ -4,3 +4,4 @@
 4. Start the test server with the command: `python .\manage.py runserver`
 
 If, God forbid, someone push something in main without a request, the face will be stuffed (с)Mishakivskiy
+не соромтель робити пулл реквести, я гляну, якщо все по коду буде ок то змержу в мейн))
