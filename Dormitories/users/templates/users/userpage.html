@@ -54,27 +54,28 @@
                     <fieldset>
                         <div class="mb-3">
                             <label for="firstname" class="form-label">First Name</label>
-                            <input name="firstname" id="firstname" class="form-control">
+                            <input name="firstname" id="firstname" class="form-control" value={{ firstname }}>
                         </div>
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Last Name</label>
-                            <input name="lastname" id="lastname" class="form-control">
+                            <input name="lastname" id="lastname" class="form-control" value={{ lastname }}>
                         </div>
                         <div class="mb-3">
                             <label for="location" class="form-label">Location</label>
-                            <input name="location" id="location" class="form-control">
+                            <input name="location" id="location" class="form-control" value={{ location }}>
                         </div>
                         <div class="mb-3">
                             <label for="faculty" class="form-label">Faculty</label>
-                            <select name="faculty" id="faculty" class="form-select">
+                            <select name="faculty" id="faculty" class="form-select" value={{ faculty }}>
                                 <option>FKPI</option>
                                 <option>FMPK</option>
                                 <option>FTMPL</option>
+
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
-                            <select name="gender" id="gender" class="form-select">
+                            <select name="gender" id="gender" class="form-select" value={{ gender }}>
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
@@ -134,6 +135,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 
 </script>
 {% endblock %}

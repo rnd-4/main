@@ -58,125 +58,136 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Register - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>Pages / Register - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <main>
+<main>
     <div class="container">
 
-      <section class="section register min-vh-90 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        <section class="section register min-vh-90 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="d-flex justify-content-center py-3">
-                <a href="#" class="logo d-flex align-items-center w-auto">
-                  <span class="d-none d-lg-block">Гуртожитки</span>
-                </a>
-              </div>
+                        <div class="d-flex justify-content-center py-3">
+                            <a href="#" class="logo d-flex align-items-center w-auto">
+                                <span class="d-none d-lg-block">Гуртожитки</span>
+                            </a>
+                        </div>
 
-              <div class="card mb-3">
+                        <div class="card mb-3">
 
-                <div class="card-body">
+                            <div class="card-body">
 
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-6 fs-4">Реєстрація</h5>
-                  </div>
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-6 fs-4">Реєстрація</h5>
+                                </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-xl-6 col-md-6">
-                      <label for="yourName" class="form-label">Ім'я</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
-                      <div class="invalid-feedback">Будь ласка, введи своє ім'я!</div>
+                                <form class="row g-3 needs-validation" method="post" novalidate>
+                                    {% csrf_token %}
+                                    <div class="col-xl-6 col-md-6">
+                                        <label for="typeFirstName" class="form-label">Ім'я</label>
+                                        {{ form.first_name }}
+                                        <div class="invalid-feedback">Будь ласка, введи своє ім'я!</div>
+                                    </div>
+                                    <div class="col-xl-6 col-md-6">
+                                        <label for="typeLastName" class="form-label">Прізвище</label>
+                                        {{ form.last_name }}
+                                        <div class="invalid-feedback">Будь ласка, введи своє прізвище!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="typeEmailX" class="form-label">Електронна пошта</label>
+                                        {{form.email}}
+                                        <div class="invalid-feedback">Введи електронну пошту!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="typeUsernameX" class="form-label">Номер студентського</label>
+                                        <div class="input-group has-validation">
+                                            {{form.username}}
+                                            <div class="invalid-feedback">Введи номер студентського.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="typePassword1" class="form-label">Пароль</label>
+                                        {{form.password1}}
+                                        <div class="invalid-feedback">Вигадай пароль!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="typePassword2" class="form-label">Повтори пароль</label>
+                                        {{form.password2}}
+                                        <div class="invalid-feedback">Пароль не сходиться!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="terms" type="checkbox" value=""
+                                                   id="acceptTerms" required>
+                                            <label class="form-check-label" for="acceptTerms">Я погоджуюсь та приймаю <a
+                                                    href="#">умови та правила</a></label>
+                                            <div class="invalid-feedback">Маєте підтвердити умови та правила.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Зареєструватися</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Вже маєш аккаунт? <a
+                                                href="/login?next=/userpage">Увійти</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xl-6 col-md-6">
-                      <label for="yourName" class="form-label">Прізвище</label>
-                      <input type="text" name="lastname" class="form-control" id="yourLastName" required>
-                      <div class="invalid-feedback">Будь ласка, введи своє прізвище!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">Електронна пошта</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Введи електронну пошту!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Номер студентського</label>
-                      <div class="input-group has-validation">
-<!--                        <span class="input-group-text" id="inputGroupPrepend">@</span>-->
-                        <input type="text" placeholder="012345..." name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Введи номер студентського.</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Пароль</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Вигадай пароль!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">Я погоджуюсь та приймаю <a href="#">умови та правила</a></label>
-                        <div class="invalid-feedback">Маєте підтвердити умови та правила.</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Зареєструватися</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Вже маєш аккаунт? <a href="/login?next=/userpage">Увійти</a></p>
-                    </div>
-                  </form>
-
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
 
-      </section>
+        </section>
 
     </div>
-  </main>
+</main>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
-  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
-  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+<script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+<script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+<script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
-  <script src="{% static 'assets/js/main.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
 

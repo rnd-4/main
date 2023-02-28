@@ -97,19 +97,19 @@
                     <h5 class="card-title text-center pb-0 fs-4">Вхід</h5>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form class="row g-3 needs-validation" method="post" novalidate>
+                    {% csrf_token %}
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Номер студентського</label>
+                      <label for="typeUsernameX" class="form-label">Номер студентського</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="username" placeholder="012345..." class="form-control" id="yourUsername" required>
+                        {{ form.username }}
                         <div class="invalid-feedback">Будь ласка, введи номер студентського.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Пароль</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <label for="typePasswordX" class="form-label">Пароль</label>
+                      {{ form.password }}
                       <div class="invalid-feedback">Будь ласка, введи пароль!</div>
                     </div>
 

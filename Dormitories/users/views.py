@@ -42,11 +42,13 @@ def userPage(request):
     email = request.user.email
     firstname = request.user.first_name
     lastname = request.user.last_name
+    location = Student.objects.filter(user_id=request.user.id).first().location
     data = {
         'username': username,
         'firstname': firstname,
         'lastname': lastname,
         'email': email,
+        'location': location,
     }
     return render(request, 'users/userpage.html', data)
 
