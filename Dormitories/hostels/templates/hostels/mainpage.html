@@ -12,8 +12,10 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <img src="https://nau.edu.ua/site/variables/menuimages/hostel6_1.jpg" class="card-img"
+                                {% if dormitorie.photo %}
+                                <img src={{ dormitorie.photo}} class="card-img"
                                      alt="hostel photo">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
