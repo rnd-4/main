@@ -1,43 +1,140 @@
 {% extends 'hostels/layout.html' %}
 {% block title %} Hostel {% endblock %}
 {% block content %}
-<section style="background-color: #eee;">
-    <div class="card bg-light">
-        <div class="card-header text-center">
-            <h3>User Page</h3>
-        </div>
+<div class="d-flex justify-content-center row">
+    <div class="mb-2"></div>
+    <div class="card bg-light mb-3" style="padding: 0;">
+        <div class="card-header "><h4>{{ dormitorie.name }}</h4></div>
         <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                        class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3">{{  }}</h5>
-                        <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
-                        
+            <div class="d-flex justify-content-between row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <img src={{ dormitorie.photo }} class="card-img"
+                                 alt="hostel photo">
+                        </div>
                     </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Hostel Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0"> </p>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="mb-0">Phone: </p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-muted mb-0">{{ dormitorie.phone }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="mb-0">Email: </p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-muted mb-0">{{ dormitorie.email }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="col text-center">
+                                    <h6><a href={{ dormitorie.location }} class="mb-0"
+                                           style="text-decoration: none;">Location</a></h6>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Phone</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0"> </p>
+                    </div>
+                    {% if dormitorie.information %}
+                    <div class="card mt-3">
+                        <div class="card-body">
+
+                            <div class="row">
+                                <h5 class="card-title">About dormitorie</h5>
+                                <p class="card-text">{{ dormitorie.information }}</p>
                             </div>
                         </div>
+                    </div>
+                    {% else %}
+                    <div class="mt-3 text-center"><p>Ooops no information</p></div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <div name="room-information">
+                        <div class="card bg-light mb-3" style="padding: 0;">
+                            <div class="card-header"><h4>My room</h4></div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between row">
+                                    <div class="col-md-6">
+                                        <div class="d-flex justify-content-center row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0 fs-4">№: </p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <p class="text-muted mb-0 fs-2">{{ number }}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex justify-content-center row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0 fs-4">Floor: </p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <p class="text-muted mb-0 fs-2">{{ floor }}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div>
+                                    some information
+                                </div>
+                                <hr>
+                                <div>
+                                    some information
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="d-flex justify-content-center">
+                                        <p class="fs-3 row">Payment status</p>
+                                    </div>
+                                    {% if payment_status %}
+                                    <button href="#" type="button" class="btn btn-success"><p class="fs-4">You
+                                        good</p></button>
+                                    {% else %}
+                                    <button href="#" type="button" class="btn btn-danger"><p class="fs-4">Pay
+                                        now</p></button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% for student in students %}
+                        <div class="card bg-light">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Full Name</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">{{ users.firstname }} {{ users.lastname }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Email</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">{{ users.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+</div>
 {% endblock %}
