@@ -4,3 +4,4 @@ pip==22.0.4
 setuptools==58.1.0
 sqlparse==0.4.3
 tzdata==2022.7
+Pillow==9.4.0
