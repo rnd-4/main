@@ -28,8 +28,8 @@ def dormitoriePage(request):
                     'faculty': student.faculty,
                     'gender': student.gender,
                 }
-                users.__add__(list(user_data))
-                print(list(user_data))
+                users.__add__(user_data)
+                print(user_data)
 
             floor = room.floor
             number = room.number
@@ -39,7 +39,7 @@ def dormitoriePage(request):
                 'floor': floor,
                 'number': number,
                 'payment_status': payment_status,
-                'users': users,
+                'users': students,
             }
             print(data)
 
