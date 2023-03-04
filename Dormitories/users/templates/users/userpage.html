@@ -9,8 +9,17 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
+                    {% if not gender %}
+                    <img src="https://th.bing.com/th/id/R.cec69a569d2d2224a738afb5ad8a419f?rik=VFoqor%2bvcZqRHA&riu=http%3a%2f%2fronaldmottram.co.nz%2fwp-content%2fuploads%2f2019%2f01%2fdefault-user-icon-8.jpg&ehk=KdwKcNMijBB2LcdEzKdT%2bIvtpFWIKQT2HetK7wCogdA%3d&risl=&pid=ImgRaw&r=0"
+                         alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    {% elif gender == "Male" %}
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                          class="rounded-circle img-fluid" style="width: 150px;">
+                    {% else %}
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    {% endif %}
                     <h5 class="my-3">{{ username }}</h5>
                     <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
 
@@ -135,6 +144,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 
 
 

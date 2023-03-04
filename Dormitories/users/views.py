@@ -45,12 +45,14 @@ def userPage(request):
     firstname = request.user.first_name
     lastname = request.user.last_name
     location = student.location if student.location else ""
+    gender = student.gender
     data = {
         'username': username,
         'firstname': firstname,
         'lastname': lastname,
         'email': email,
         'location': location,
+        'gender': gender,
     }
     return render(request, 'users/userpage.html', data)
 
