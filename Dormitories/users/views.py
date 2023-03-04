@@ -25,7 +25,7 @@ def userPage(request):
         user = User.objects.get(username=username)
         user_id = request.user.id
 
-        student = Student.objects.filter(user_id=user_id).first()
+        student = Student.objects.get(user_id=user_id)
         if not student:
             Student.objects.create(gender=gender, faculty=faculty, user_id=user_id)
         else:
@@ -38,15 +38,19 @@ def userPage(request):
         user.last_name = lastname
         user.save()
 
+    student = Student.objects.get(user_id=request.user.id)
+
     username = request.user.username
     email = request.user.email
     firstname = request.user.first_name
     lastname = request.user.last_name
+    location = student.location if student.location else ""
     data = {
         'username': username,
         'firstname': firstname,
         'lastname': lastname,
         'email': email,
+        'location': location,
     }
     return render(request, 'users/userpage.html', data)
 

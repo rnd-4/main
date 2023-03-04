@@ -24,7 +24,7 @@
 <body>
 <aside>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+        <div class="container-fluid" style="max-width: 80vw;">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -53,8 +53,9 @@
     </nav>
 </aside>
 
-<div class="container">
+<div class="container" style="max-width: 80vw">
     <main>
+        <div class="mb-2"></div>
         {% block content %}
         {% endblock %}
     </main>

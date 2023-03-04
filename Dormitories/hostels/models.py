@@ -3,8 +3,10 @@ from .enums import RoomTypeChoices
 class Hostel(models.Model):
     name = models.CharField(max_length=16)
     email = models.EmailField()
-    phone = models.CharField(max_length=12)
+    phone = models.CharField(max_length=18)
     location = models.URLField()
+    information = models.TextField(null=True)
+    photo = models.ImageField(null=True, upload_to="images/")
 
     def __str__(self):
         return self.name

@@ -1,49 +1,47 @@
 {% extends 'hostels/layout.html' %}
 {% block title %} {{ username }} page {% endblock %}
 {% block content %}
-<section style="background-color: #eee;">
-    <div class="card bg-light">
-        <div class="card-header text-center">
-            <h3>User Page</h3>
-        </div>
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                        class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3">{{ username }}</h5>
-                        <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
-                        
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Full Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ firstname }} {{ lastname }}</p>
-                            </div>
+<div class="card">
+    <div class="card-header text-center">
+        <h3>User Page</h3>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    <h5 class="my-3">{{ username }}</h5>
+                    <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
+
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Full Name</p>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{ email }}</p>
-                            </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ firstname }} {{ lastname }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ email }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-
+</div>
 
 <!-- Modal -->
-<div class="modal fade show" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" style="display: none;" aria-modal="true" role="dialog">
+<div class="modal fade show" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLiveLabel" style="display: none;" aria-modal="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,37 +54,39 @@
                     <fieldset>
                         <div class="mb-3">
                             <label for="firstname" class="form-label">First Name</label>
-                            <input name="firstname" id="firstname" class="form-control">
+                            <input name="firstname" id="firstname" class="form-control" value={{ firstname }}>
                         </div>
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Last Name</label>
-                            <input name="lastname" id="lastname" class="form-control">
+                            <input name="lastname" id="lastname" class="form-control" value={{ lastname }}>
                         </div>
                         <div class="mb-3">
                             <label for="location" class="form-label">Location</label>
-                            <input name="location" id="location" class="form-control">
+                            <input name="location" id="location" class="form-control" value={{ location }}>
                         </div>
                         <div class="mb-3">
                             <label for="faculty" class="form-label">Faculty</label>
-                            <select name="faculty" id="faculty" class="form-select">
+                            <select name="faculty" id="faculty" class="form-select" value={{ faculty }}>
                                 <option>FKPI</option>
                                 <option>FMPK</option>
                                 <option>FTMPL</option>
+
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
-                            <select name="gender" id="gender" class="form-select">
+                            <select name="gender" id="gender" class="form-select" value={{ gender }}>
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
                         </div>
                     </fieldset>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close
+                        </button>
                         <button type="submit" class="btn btn-primary" class="save">Save</button>
                     </div>
-                </form> 
+                </form>
             </div>
         </div>
     </div>
@@ -135,5 +135,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
+
 </script>
 {% endblock %}
