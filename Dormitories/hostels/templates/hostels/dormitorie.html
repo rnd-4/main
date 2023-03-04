@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-6">
                     <div name="room-information">
-                        <div class="card bg-light mb-3" style="padding: 0;">
+                        <div class="card bg-light" style="padding: 0;">
                             <div class="card-header"><h4>My room</h4></div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between row">
@@ -68,7 +68,7 @@
                                                 <p class="mb-0 fs-4">№: </p>
                                             </div>
                                             <div class="col-sm-3">
-                                                <p class="text-muted mb-0 fs-2">{{ number }}</p>
+                                                <p class="text-muted mb-0 fs-4">{{ number }}</p>
                                             </div>
                                         </div>
                                         <hr>
@@ -79,7 +79,7 @@
                                                 <p class="mb-0 fs-4">Floor: </p>
                                             </div>
                                             <div class="col-sm-3">
-                                                <p class="text-muted mb-0 fs-2">{{ floor }}</p>
+                                                <p class="text-muted mb-0 fs-4">{{ floor }}</p>
                                             </div>
                                         </div>
                                         <hr>
@@ -93,29 +93,34 @@
                                     some information
                                 </div>
                                 <hr>
-                                <div class="row">
-                                    <div class="d-flex justify-content-center">
-                                        <p class="fs-3 row">Payment status</p>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="d-flex justify-content-center">
+                                            <p class="fs-3">Payment status</p>
+                                        </div>
                                     </div>
-                                    {% if payment_status %}
-                                    <button href="#" type="button" class="btn btn-success"><p class="fs-4">You
-                                        good</p></button>
-                                    {% else %}
-                                    <button href="#" type="button" class="btn btn-danger"><p class="fs-4">Pay
-                                        now</p></button>
-                                    {% endif %}
+                                    <div class="row" style="padding:0px 12px">
+                                        {% if payment_status %}
+                                        <button href="#" type="button" class="btn btn-success"><p class="fs-4">You
+                                            good</p></button>
+                                        {% else %}
+                                        <button href="#" type="button" class="btn btn-danger"><p class="fs-4">Pay
+                                            now</p></button>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {% for user in users %}
-                        <div class="card bg-light">
-                            <div class="col">
+                        {% for student in students %}
+                        <div class="card bg-light mt-3">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <p class="mb-0">Full Name</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{ user.firstname }} {{ user.lastname }}</p>
+                                        <p class="text-muted mb-0">{{ student.user.first_name }}
+                                            {{student.user.last_name}}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -124,7 +129,7 @@
                                         <p class="mb-0">Email</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{ user.email }}</p>
+                                        <p class="text-muted mb-0">{{ student.user.email }}</p>
                                     </div>
                                 </div>
                             </div>
