@@ -9,3 +9,4 @@ class FacultyChoices(TextChoices):
     NKLP = "NKLP", "NKLP"
     FPK = "FPK", "FPK"
     FRDCP = "FRDCP", "FRDCP"
+

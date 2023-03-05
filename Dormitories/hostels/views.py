@@ -28,7 +28,5 @@ def dormitoriePage(request):
             print(data)
 
             return render(request, 'hostels/dormitorie.html', data)
-        else:
-            return render(request, 'hostels/register.html')
     else:
         return render(request, 'users/login.html')
