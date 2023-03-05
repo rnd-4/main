@@ -14,3 +14,10 @@ class Student(models.Model):
 
     def __unicode__(self):
         return self.user
+
+class StatementRequest(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.user

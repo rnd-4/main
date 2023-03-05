@@ -22,7 +22,10 @@
                     {% endif %}
                     <h5 class="my-3">{{ username }}</h5>
                     <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
-
+                    {% if not statement_request %}
+                    <a href="{% url 'request' %}" class="btn btn-success btn-sm">Statement request
+                    </a>
+                    {% endif %}
                 </div>
                 <div class="col">
                     <div class="row">
@@ -79,7 +82,6 @@
                                 <option>FKPI</option>
                                 <option>FMPK</option>
                                 <option>FTMPL</option>
-
                             </select>
                         </div>
                         <div class="mb-3">
@@ -144,9 +146,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-
-
 
 
 </script>

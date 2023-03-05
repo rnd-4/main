@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from .forms import LoginUserForm, RegisterUserForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
-from .models import Student
+from .models import Student, StatementRequest
 
 
 @login_required(login_url='./login')
@@ -39,6 +39,8 @@ def userPage(request):
         user.save()
 
     student = Student.objects.get(user_id=request.user.id)
+    statenebt_request = StatementRequest.objects.filter(user_id=request.user.id).first()
+    print(statenebt_request)
 
     username = request.user.username
     email = request.user.email
@@ -47,6 +49,7 @@ def userPage(request):
     location = student.location if student.location else ""
     gender = student.gender
     data = {
+        'statement_request': statenebt_request,
         'username': username,
         'firstname': firstname,
         'lastname': lastname,
@@ -56,6 +59,24 @@ def userPage(request):
     }
     return render(request, 'users/userpage.html', data)
 
+
+def statement_request(request):
+    student = Student.objects.get(user_id=request.user.id)
+
+    email = request.user.email
+    firstname = request.user.first_name
+    lastname = request.user.last_name
+    location = student.location if student.location else ""
+    gender = student.gender
+    everage_score = student.everage_score
+    faculty = student.faculty
+
+    if (not email or not firstname or not lastname or not location or not gender or not everage_score or not faculty):
+        return HttpResponseRedirect(reverse('userpage'), args=['Your data is incomplete'])
+    else:
+        statement_request = StatementRequest.objects.create(user_id=request.user.id)
+        statement_request.save()
+        return reverse_lazy('userpage')
 
 class LoginUser(LoginView):
     form_class = LoginUserForm
