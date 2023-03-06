@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from users.models import Student
 from .models import Hostel, Room
 
-
+@login_required(login_url='./login')
 def dormitoriePage(request):
     if request.user.is_authenticated == True:
         user_id = request.user.id

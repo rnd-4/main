@@ -16,6 +16,9 @@ from .arrays import regions, facultys
 
 @login_required(login_url='./login')
 def userPage(request):
+    if request.user.is_superuser:
+        return HttpResponseRedirect(reverse('admin_settlement_requests'))
+
     if request.method == 'POST':
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
@@ -114,8 +117,9 @@ def statement_request(request):
         return HttpResponseRedirect(reverse('userpage'))
 
 
-def administration(request):
-    return render(request, 'users/administration.html')
+def admin_settlement_requests(request):
+
+    return render(request, 'users/admin_settlement_requests.html')
 
 class LoginUser(LoginView):
     form_class = LoginUserForm

@@ -7,5 +7,5 @@ urlpatterns = [
     path('register', RegisterUser.as_view(), name='register'),
     path('logout', Logout, name='logout'),
     path('request', statement_request, name='request'),
-    path('administration', administration, name='administration')
+    path('admin_settlement_requests', admin_settlement_requests, name='admin_settlement_requests')
 ]
