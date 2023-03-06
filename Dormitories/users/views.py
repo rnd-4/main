@@ -118,8 +118,39 @@ def statement_request(request):
 
 
 def admin_settlement_requests(request):
+    statement_requests = StatementRequest.objects.filter()
 
-    return render(request, 'users/admin_settlement_requests.html')
+    info = list()
+    for statement in statement_requests:
+        user = User.objects.get(id=statement.user.id)
+        student = Student.objects.get(user_id=user.id)
+        info.append({
+            'user': user,
+            'student': student,
+            'statement': statement,
+        })
+
+    data = {
+        'information': info,
+    }
+    return render(request, 'users/admin_settlement_requests.html', data)
+
+
+def students(request):
+    students = Student.objects.filter()
+
+    info = list()
+    for student in students:
+        user = User.objects.get(id=student.user.id)
+        info.append({
+            'user': user,
+            'student': student,
+        })
+
+    data = {
+        'information': info,
+    }
+    return render(request, 'users/students.html', data)
 
 class LoginUser(LoginView):
     form_class = LoginUserForm

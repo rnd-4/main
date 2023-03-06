@@ -1,7 +1,54 @@
 {% extends 'users/administration.html' %}
 {% block title %} Hostel {% endblock %}
 {% block content %}
-<div>
-  
+<div class="card">
+    <div class="card-header h5">
+        <div class="row">
+            <div class="col">
+               Name
+            </div>
+            <div class="col">
+                Student id
+            </div>
+            <div class="col">
+                Primary residence
+            </div>
+            <div class="col">
+                Faculty
+            </div>
+            <div class="col">
+                Everage score
+            </div>
+            <div class="col">
+                Room
+            </div>
+        </div>
+    </div>
 </div>
+{% for info in information %}
+<div class="card">
+    <div class="card-body ">
+        <div class="row">
+            <div class="col">
+                {{ info.user.first_name }} {{ info.user.last_name }}
+            </div>
+            <div class="col">
+                {{ info.user.username }}
+            </div>
+            <div class="col">
+                {{ info.student.location }}
+            </div>
+            <div class="col">
+                {{ info.student.faculty }}
+            </div>
+            <div class="col">
+                {{ info.student.everage_score }}
+            </div>
+            <div class="col">
+                {{ info.student.room }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
