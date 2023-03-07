@@ -180,3 +180,15 @@ def Logout(request):
         logout(request)
         url_match = reverse_lazy('mainpage')
         return redirect(url_match)
+
+def accept_request(request,id):
+    statement = StatementRequest.objects.get(id=id)
+    statement.approved = True
+    statement.save()
+    return HttpResponseRedirect(reverse('admin_settlement_requests'))
+
+
+def decline_request(request,id):
+    statement = StatementRequest.objects.get(id=id)
+    statement.delete()
+    return HttpResponseRedirect(reverse('admin_settlement_requests'))

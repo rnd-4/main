@@ -8,5 +8,7 @@ urlpatterns = [
     path('logout', Logout, name='logout'),
     path('request', statement_request, name='request'),
     path('admin_settlement_requests', admin_settlement_requests, name='admin_settlement_requests'),
-    path('students', students, name='students')
+    path('students', students, name='students'),
+    path('accept-request/<int:id>/',accept_request,name='accept-request'),
+    path('decline-request/<int:id>/',decline_request,name='decline-request'),
 ]

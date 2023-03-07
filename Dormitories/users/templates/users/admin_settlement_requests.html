@@ -25,6 +25,7 @@
     </div>
 </div>
 {% for info in information %}
+{% if not info.statement.approved %}
 <div class="card">
     <div class="card-body ">
         <div class="row">
@@ -46,15 +47,16 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <button type="button" class="btn btn-primary" style="width: 100%">Accept</button>
+                        <a href="{% url 'accept-request' info.statement.id %}" type="button" class="btn btn-primary" style="width: 100%">Accept</a>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-danger" style="width: 100%">Decline</button>
+                        <a href="{% url 'decline-request' info.statement.id %}" type="button" class="btn btn-danger" style="width: 100%">Decline</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endif %}
 {% endfor %}
 {% endblock %}
