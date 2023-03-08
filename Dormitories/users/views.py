@@ -5,11 +5,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
+
+import Dormitories
 from .forms import LoginUserForm, RegisterUserForm
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .models import Student, StatementRequest
+from hostels.models import Hostel
 from django.contrib import messages
 from .arrays import regions, facultys
 
@@ -47,8 +50,9 @@ def userPage(request):
         return HttpResponseRedirect(reverse('userpage'))
 
     student = Student.objects.get(user_id=request.user.id)
+    students = list(Student.objects.filter(room=student.room))
     statenebt_request = StatementRequest.objects.filter(user_id=request.user.id).first()
-    print(statenebt_request)
+    dormitory = Hostel.objects.get(id=student.room.hostel.id)
 
     username = request.user.username
     email = request.user.email
@@ -56,10 +60,16 @@ def userPage(request):
     lastname = request.user.last_name
     location = student.location if student.location else ""
     everage_score = student.everage_score
-    faculty = student.faculty
     gender = student.gender
+    faculty = student.faculty
+    room = student.room
+    payment_status = student.payment_status
+
     data = {
         'statement_request': statenebt_request,
+        'dormitory': dormitory,
+        'students': students,
+
         'username': username,
         'firstname': firstname,
         'lastname': lastname,
@@ -67,6 +77,9 @@ def userPage(request):
         'location': location,
         'gender': gender,
         'faculty': faculty,
+        'room': room,
+        'payment_status': payment_status,
+
         'facultys': facultys,
         'everage_score': everage_score,
         'regions': regions,

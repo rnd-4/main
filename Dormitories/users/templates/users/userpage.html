@@ -1,102 +1,104 @@
 {% extends 'hostels/layout.html' %}
 {% block title %} {{ username }} page {% endblock %}
 {% block content %}
-<div class="card">
-    <div class="card-header text-center">
-        <h3>User Page</h3>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col text-center">
-                {% if not gender %}
-                <img src="https://th.bing.com/th/id/R.cec69a569d2d2224a738afb5ad8a419f?rik=VFoqor%2bvcZqRHA&riu=http%3a%2f%2fronaldmottram.co.nz%2fwp-content%2fuploads%2f2019%2f01%2fdefault-user-icon-8.jpg&ehk=KdwKcNMijBB2LcdEzKdT%2bIvtpFWIKQT2HetK7wCogdA%3d&risl=&pid=ImgRaw&r=0"
-                     alt="avatar"
-                     class="rounded-circle img-fluid" style="width: 150px;">
-                {% elif gender == "Male" %}
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                     class="rounded-circle img-fluid" style="width: 150px;">
-                {% else %}
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp" alt="avatar"
-                     class="rounded-circle img-fluid" style="width: 150px;">
-                {% endif %}
+<div>
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>User Page</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col text-center">
+                    {% if not gender %}
+                    <img src="https://th.bing.com/th/id/R.cec69a569d2d2224a738afb5ad8a419f?rik=VFoqor%2bvcZqRHA&riu=http%3a%2f%2fronaldmottram.co.nz%2fwp-content%2fuploads%2f2019%2f01%2fdefault-user-icon-8.jpg&ehk=KdwKcNMijBB2LcdEzKdT%2bIvtpFWIKQT2HetK7wCogdA%3d&risl=&pid=ImgRaw&r=0"
+                         alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    {% elif gender == "Male" %}
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    {% else %}
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    {% endif %}
 
-                <h5 class="my-3">Student id №:{{ username }}</h5>
+                    <h5 class="my-3">Student id №:{{ username }}</h5>
 
-                {% if not statement_request or statement_request.approved %}
-                <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
-                {% if not statement_request%}
-                <a href="{% url 'request' %}" class="btn btn-success btn-sm">Statement request</a>
-                {% endif %}
-                {% elif not statement_request.approved %}
-                <div class="alert alert-primary" role="alert">Your request is on processing</div>
-                {% endif %}
+                    {% if not statement_request or statement_request.approved %}
+                    <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
+                    {% if not statement_request%}
+                    <a href="{% url 'request' %}" class="btn btn-success btn-sm">Statement request</a>
+                    {% endif %}
+                    {% elif not statement_request.approved %}
+                    <div class="alert alert-primary" role="alert">Your request is on processing</div>
+                    {% endif %}
 
-                {% if messages %}
-                {% for message in messages %}
-                <div class="col mt-3">
-                    <div class="alert alert-warning" role="alert">
-                        {{ message }}
-                    </div>
-                </div>
-                {% endfor %}
-                {% endif %}
-
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p class="mb-0">Full Name</p>
-                    </div>
-                    <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{ firstname }} {{ lastname }}</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p class="mb-0">Email</p>
-                    </div>
-                    <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{ email }}</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p class="mb-0">Location</p>
-                    </div>
-                    <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{ location }}</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p class="mb-0">Gender</p>
-                    </div>
-                    <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{ gender }}</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="mb-0">Faculty</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="text-muted mb-0">{{ faculty }}</p>
-                            </div>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="col mt-3">
+                        <div class="alert alert-warning" role="alert">
+                            {{ message }}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p class="mb-0">Everage score</p>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Full Name</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ firstname }} {{ lastname }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ email }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Location</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ location }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Gender</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ gender }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">Faculty</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="text-muted mb-0">{{ faculty }}</p>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <p class="text-muted mb-0">{{ everage_score }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">Everage score</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="text-muted mb-0">{{ everage_score }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,8 +106,10 @@
             </div>
         </div>
     </div>
+    {% if room %}
+    {% include "hostels/dormitorie.html" %}
+    {% endif %}
 </div>
-
 <!-- Modal -->
 <div class="modal fade show" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLiveLabel" style="display: none;" aria-modal="true" role="dialog">
@@ -218,6 +222,9 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
+
 
 
 
