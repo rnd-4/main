@@ -1,0 +1,18 @@
+{% extends 'users/administration.html' %}
+{% block title %}  confirm {% endblock %}
+{% block content %}
+
+{% for data in hostels_data %}
+<div class="card">
+    <div class="card-header"><h4>{{ data.hostel.name }}</h4></div>
+    <div class="card-body">
+        <div class="row">
+            {% for room in data.rooms %}
+            <div class="col-sm-1"><a href="{% url 'accept-request' statement_id=statement.id room_id=room.id %}" class="btn">{{ room.number }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

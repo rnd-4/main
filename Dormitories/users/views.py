@@ -1,4 +1,3 @@
-from django.shortcuts import render
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
@@ -6,13 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 
-import Dormitories
 from .forms import LoginUserForm, RegisterUserForm
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .models import Student, StatementRequest
-from hostels.models import Hostel
+from hostels.models import Hostel, Room
 from django.contrib import messages
 from .arrays import regions, facultys
 
@@ -52,7 +50,10 @@ def userPage(request):
     student = Student.objects.get(user_id=request.user.id)
     students = list(Student.objects.filter(room=student.room))
     statenebt_request = StatementRequest.objects.filter(user_id=request.user.id).first()
-    dormitory = Hostel.objects.get(id=student.room.hostel.id)
+    if student.room:
+        dormitory = Hostel.objects.get(id=student.room.hostel.id)
+    else:
+        dormitory = None
 
     username = request.user.username
     email = request.user.email
@@ -62,7 +63,7 @@ def userPage(request):
     everage_score = student.everage_score
     gender = student.gender
     faculty = student.faculty
-    room = student.room
+    room = student.room if student.room else None
     payment_status = student.payment_status
 
     data = {
@@ -130,23 +131,44 @@ def statement_request(request):
         return HttpResponseRedirect(reverse('userpage'))
 
 
-def admin_settlement_requests(request):
+def admin_statement_requests(request):
     statement_requests = StatementRequest.objects.filter()
 
-    info = list()
-    for statement in statement_requests:
-        user = User.objects.get(id=statement.user.id)
+    information = list()
+    for settlement in statement_requests:
+        user = User.objects.get(id=settlement.user.id)
         student = Student.objects.get(user_id=user.id)
-        info.append({
+        information.append({
             'user': user,
             'student': student,
-            'statement': statement,
+            'statement': settlement,
         })
 
     data = {
-        'information': info,
+        'information': information,
     }
     return render(request, 'users/admin_settlement_requests.html', data)
+
+
+def request_confirm(request,statement_id):
+    statement = StatementRequest.objects.get(id=statement_id)
+
+    hostels = Hostel.objects.all()
+    hostels_data = []
+
+    for hostel in hostels:
+        rooms =  Room.objects.filter(hostel=hostel).order_by('number')
+        hostels_data.append({
+            'hostel': hostel,
+            'rooms': rooms,
+        })
+
+    data = {
+        'hostels_data': hostels_data,
+        'statement': statement,
+    }
+
+    return render(request, 'users/request_confirm.html', data)
 
 
 def students(request):
@@ -194,8 +216,14 @@ def Logout(request):
         url_match = reverse_lazy('mainpage')
         return redirect(url_match)
 
-def accept_request(request,id):
-    statement = StatementRequest.objects.get(id=id)
+def accept_request(request,statement_id,room_id):
+    statement = StatementRequest.objects.get(id=statement_id)
+    room = Room.objects.get(id=room_id)
+    student = Student.objects.get(user_id=statement.user.id)
+
+    student.room = room
+    student.save()
+
     statement.approved = True
     statement.save()
     return HttpResponseRedirect(reverse('admin_settlement_requests'))

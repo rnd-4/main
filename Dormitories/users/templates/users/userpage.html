@@ -25,7 +25,7 @@
 
                     {% if not statement_request or statement_request.approved %}
                     <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
-                    {% if not statement_request%}
+                    {% if not statement_request %}
                     <a href="{% url 'request' %}" class="btn btn-success btn-sm">Statement request</a>
                     {% endif %}
                     {% elif not statement_request.approved %}
@@ -156,9 +156,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="everage_score" class="form-label">Everage score</label>
-                            <input name="everage_score" id="everage_score" class="form-control" value={{ everage_score
-                                   }}>
+                            <label for="everage_score" class="form-label">Average score</label>
+                            <input name="everage_score" id="everage_score" class="form-control" value={{ everage_score }}>
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
@@ -222,20 +221,5 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 {% endblock %}

@@ -1,5 +1,8 @@
 from django.db import models
 from .enums import RoomTypeChoices
+from users.enums import StudentGenderChoices
+
+
 class Hostel(models.Model):
     name = models.CharField(max_length=16)
     email = models.EmailField()
@@ -22,6 +25,7 @@ class Room(models.Model):
     floor = models.IntegerField()
     price = models.IntegerField()
     room_type = models.CharField(max_length=13, choices=RoomTypeChoices.choices)
+    gender = models.CharField(max_length=13, choices=StudentGenderChoices.choices, default=StudentGenderChoices.male)
 
     def __str__(self):
         return str(self.number)

@@ -1,11 +1,11 @@
 {% extends 'users/administration.html' %}
-{% block title %} Hostel {% endblock %}
+{% block title %} Requests {% endblock %}
 {% block content %}
 <div class="card">
     <div class="card-header h5">
         <div class="row">
             <div class="col">
-               Name
+                Name
             </div>
             <div class="col">
                 Student id
@@ -47,16 +47,20 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <a href="{% url 'accept-request' info.statement.id %}" type="button" class="btn btn-primary" style="width: 100%">Accept</a>
+                        <a href="{% url 'request_confirm' info.statement.id %}" type="button" class="btn btn-primary"
+                           style="width: 100%">Accept</a>
                     </div>
                     <div class="col">
-                        <a href="{% url 'decline-request' info.statement.id %}" type="button" class="btn btn-danger" style="width: 100%">Decline</a>
+                        <a href="{% url 'decline-request' info.statement.id %}" type="button" class="btn btn-danger"
+                           style="width: 100%">Decline</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% else %}
+<div class="alert alert-info text-center fs-5 mt-2" role="alert">Do not have any statement requests!</div>
 {% endif %}
 {% endfor %}
 {% endblock %}
