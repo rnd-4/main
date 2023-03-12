@@ -1,14 +1,11 @@
 {% extends 'hostels/layout.html' %}
 {% block title %} {{ username }} page {% endblock %}
 {% block content %}
-<div>
-    <div class="card">
-        <div class="card-header text-center">
-            <h3>User Page</h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col text-center">
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     {% if not gender %}
                     <img src="https://th.bing.com/th/id/R.cec69a569d2d2224a738afb5ad8a419f?rik=VFoqor%2bvcZqRHA&riu=http%3a%2f%2fronaldmottram.co.nz%2fwp-content%2fuploads%2f2019%2f01%2fdefault-user-icon-8.jpg&ehk=KdwKcNMijBB2LcdEzKdT%2bIvtpFWIKQT2HetK7wCogdA%3d&risl=&pid=ImgRaw&r=0"
                          alt="avatar"
@@ -20,16 +17,13 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4.webp" alt="avatar"
                          class="rounded-circle img-fluid" style="width: 150px;">
                     {% endif %}
+                    <h5 class="my-3">ID №: <span style="color:rgba(52,83,200,0.57);">{{ username }}</span></h5>
 
-                    <h5 class="my-3">Student id №:{{ username }}</h5>
-
-                    {% if not statement_request or statement_request.approved %}
-                    <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>
+{#                    <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>#}
                     {% if not statement_request and not room %}
-                    <a href="{% url 'request' %}" class="btn btn-success btn-sm">Statement request</a>
-                    {% endif %}
+                    <a href="{% url 'request' %}" class="btn btn-success btn-sm">Запит на поселення</a>
                     {% elif not statement_request.approved %}
-                    <div class="alert alert-primary" role="alert">Your request is on processing</div>
+                    <div class="alert alert-primary" role="alert">Запит на поселення в опрацюванні</div>
                     {% endif %}
 
                     {% if messages %}
@@ -41,111 +35,88 @@
                     </div>
                     {% endfor %}
                     {% endif %}
-
                 </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Full Name</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{ firstname }} {{ lastname }}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Email</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{ email }}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Location</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{ location }}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Gender</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{ gender }}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p class="mb-0">Faculty</p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="text-muted mb-0">{{ faculty }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p class="mb-0">Everage score</p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="text-muted mb-0">{{ everage_score }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-    {% if room %}
-    {% include "hostels/dormitorie.html" %}
-    {% endif %}
-</div>
-<!-- Modal -->
-<div class="modal fade show" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLiveLabel" style="display: none;" aria-modal="true" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLiveLabel">Adjust user</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <fieldset>
-                        <div class="mb-3">
-                            <label for="firstname" class="form-label">First Name</label>
-                            <input name="firstname" id="firstname" class="form-control" value={{ firstname }}>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lastname" class="form-label">Last Name</label>
-                            <input name="lastname" id="lastname" class="form-control" value={{ lastname }}>
-                        </div>
-                        <div class="mb-3">
-                            <label for="location" class="form-label">Location</label>
-                            <select name="location" id="location" class="form-select" value={{ location }}>
-                                {% for region in regions %}
-                                {% if region == location %}
-                                <option selected>{{ region }}</option>
-                                {% else %}
-                                <option>{{ region }}</option>
-                                {% endif %}
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="faculty" class="form-label">Faculty</label>
-                            <select name="faculty" id="faculty" class="form-select">
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+                <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Опис</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Редагувати</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Змінити пароль</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                    <pre>
+                    </pre>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Повне ім'я</div>
+                    <div class="col-lg-9 col-md-8">{{ firstname }} {{ lastname }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Електронна пошта</div>
+                    <div class="col-lg-9 col-md-8">{{ email }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Регіон</div>
+                    <div class="col-lg-9 col-md-8">{{ location }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Стать</div>
+                    <div class="col-lg-9 col-md-8">{{ gender }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Факультет</div>
+                    <div class="col-lg-9 col-md-8">{{ faculty }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Середній бал</div>
+                    <div class="col-lg-9 col-md-8">{{ everage_score }}</div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                  <!-- Profile Edit Form -->
+                  <form method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+
+                    <div class="row mb-3">
+                      <label for="firstname" class="col-md-4 col-lg-3 col-form-label">Ім'я</label>
+                      <div class="col-md-8 col-lg-9">
+                          <input name="firstname" id="firstname" class="form-control" value={{ firstname }}>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Прізвище</label>
+                      <div class="col-md-8 col-lg-9">
+                          <input name="lastname" id="lastname" class="form-control" value={{ lastname }}>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Факультет</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select name="faculty" id="faculty" class="form-select">
                                 {% for f in facultys %}
                                 {% if f == faculty %}
                                 <option selected>{{ f }}</option>
@@ -154,14 +125,28 @@
                                 {% endif %}
                                 {% endfor %}
                             </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="everage_score" class="form-label">Average score</label>
-                            <input name="everage_score" id="everage_score" class="form-control" value={{ everage_score }}>
-                        </div>
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">Gender</label>
-                            <select name="gender" id="gender" class="form-select" value={{ gender }}>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Регіон</label>
+                      <div class="col-md-8 col-lg-9">
+                          <select name="location" id="location" class="form-select" value={{ location }}>
+                                {% for region in regions %}
+                                {% if region == location %}
+                                <option selected>{{ region }}</option>
+                                {% else %}
+                                <option>{{ region }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="gender" class="col-md-4 col-lg-3 col-form-label">Стать</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select name="gender" id="gender" class="form-select" value={{ gender }}>
                                 {% for g in genders %}
                                 {% if g == gender %}
                                 <option selected>{{ g }}</option>
@@ -170,61 +155,62 @@
                                 {% endif %}
                                 {% endfor %}
                             </select>
-                        </div>
-                    </fieldset>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close
-                        </button>
-                        <button type="submit" class="btn btn-primary" class="save">Save</button>
+                      </div>
                     </div>
-                </form>
+
+                    <div class="row mb-3">
+                      <label for="everage_score" class="col-md-4 col-lg-3 col-form-label">Середній бал</label>
+                      <div class="col-md-8 col-lg-9">
+                          <input name="everage_score" id="everage_score" class="form-control" value={{ everage_score }}>
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary" class="save">Зберегти</button>
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+                </div>
+              <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <!-- Change Password Form -->
+                  <form>
+
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Поточний пароль</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="password" type="password" class="form-control" id="currentPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Новий пароль</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Повтор нового паролю</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Змінити пароль</button>
+                    </div>
+                  </form><!-- End Change Password Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- Modeal Script -->
-<script>
-// Get the modal
-var modal = document.getElementById("staticBackdropLive");
+    {% if room %}
+    {% include "hostels/dormitorie.html" %}
+    {% endif %}
 
-// Get the button that opens the modal
-var btn = document.getElementById("adjustUser");
-
-// Get the button that opens the modal
-var close = document.getElementById("close");
-
-// Get the button that opens the modal
-var save = document.getElementById("save");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("btn-close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks on close button, close the modal
-close.onclick = function(){
-    modal.style.display = "none";
-}
-
-// When the user clicks on save button, close the modal
-save.onclick = function(){
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
 {% endblock %}

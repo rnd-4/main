@@ -16,22 +16,33 @@
                             {%for room in data.rooms %}
                             {% if room.gender == "Male" or room.gender == 'male' %}
                             {% if room.number_of_residents < 3 %}
-                            <div class="col-md" style="padding:1px"><button
-                                    href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}"
-                                    type="button" class="btn btn-success"
-                                    {%if room.gender != student.gender %}
-                                    disabled
-                                    {% endif %}>{{ room.number }}</button></div>
+                            <div class="col-md" style="padding:1px">
+                                <a href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}">
+                                    <button type="button" class="btn btn-success"
+                                        {%if room.gender != student.gender %}
+                                        disabled
+                                        {% endif %}>{{ room.number }}
+                                </button>
+                                </a>
+                            </div>
                             {% elif room.number_of_residents == 3 %}
-                            <div class="col-md" style="padding:1px"><button
-                                    href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}"
-                                    type="button" class="btn btn-warning"
-                                    {%if room.gender != student.gender %}
-                                    disabled
-                                    {% endif %}>{{ room.number }}</button></div>
+                            <div class="col-md" style="padding:1px">
+                                <a href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}">
+                                    <button type="button" class="btn btn-warning"
+                                        {%if room.gender != student.gender %}
+                                        disabled
+                                        {% endif %}>
+                                    {{ room.number }}
+                                </button>
+                                </a>
+                            </div>
                             {% else %}
-                            <div class="col-md" style="padding:1px"><button
-                                    class="btn btn-danger " disabled>{{ room.number }}</button></div>
+                            <div class="col-md" style="padding:1px"><a>
+                                <button class="btn btn-danger " disabled>
+                                    {{ room.number }}
+                                </button>
+                            </a>
+                            </div>
                             {% endif %}
                             {% endif %}
                             
@@ -48,22 +59,32 @@
                             {%for room in data.rooms %}
                             {% if room.gender == "Female" or room.gender == 'female' %}
                             {% if room.number_of_residents < 3 %}
-                            <div class="col-md" style="padding:1px"><button
-                                    href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}"
-                                    type="button" class="btn btn-success"
-                                    {%if room.gender != student.gender %}
-                                    disabled
-                                    {% endif %}>{{ room.number }}</button></div>
+                            <div class="col-md" style="padding:1px">
+                                <a href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}">
+                                    <button type="button" class="btn btn-success"
+                                        {%if room.gender != student.gender %}
+                                        disabled
+                                        {% endif %}>{{ room.number }}
+                                </button>
+                                </a>
+                            </div>
                             {% elif room.number_of_residents == 3 %}
-                            <div class="col-md" style="padding:1px"><button
-                                    href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}"
-                                    type="button" class="btn btn-warning"
-                                    {%if room.gender != student.gender %}
-                                    disabled
-                                    {% endif %}>{{ room.number }}</button></div>
+                            <div class="col-md" style="padding:1px">
+                                <a href="{% url 'accept_request' statement_id=statement.id room_id=room.id %}">
+                                    <button type="button" class="btn btn-warning"
+                                        {%if room.gender != student.gender %}
+                                        disabled
+                                        {% endif %}>
+                                    {{ room.number }}
+                                </button>
+                                </a>
+                            </div>
                             {% else %}
-                            <div class="col-md" style="padding:1px"><button class="btn btn-danger " disabled>{{ room.number
-                                }}</button>
+                            <div class="col-md" style="padding:1px"><a>
+                                <button class="btn btn-danger " disabled>
+                                    {{ room.number }}
+                                </button>
+                            </a>
                             </div>
                             {% endif %}
                             {% endif %}
