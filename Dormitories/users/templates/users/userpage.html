@@ -22,7 +22,7 @@
 {#                    <button id="adjustUser" type="button" class="btn btn-primary btn-sm">Adjust user</button>#}
                     {% if not statement_request and not room %}
                     <a href="{% url 'request' %}" class="btn btn-success btn-sm">Запит на поселення</a>
-                    {% elif not statement_request.approved %}
+                    {% elif not statement_request.approved and not room %}
                     <div class="alert alert-primary" role="alert">Запит на поселення в опрацюванні</div>
                     {% endif %}
 

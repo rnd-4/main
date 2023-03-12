@@ -26,6 +26,17 @@
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
+    <style>
+    .img-location{
+        height: 100px;
+        object-fit: cover;
+        object-position: 30% 35%;
+        transition: all .2s;
+    }
+    .img-location:hover{
+        object-position: 30% 52%;
+    }
+    </style>
     {% block header %}{% endblock %}
 
   <!-- =======================================================
