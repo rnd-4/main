@@ -11,10 +11,6 @@ from users.models import Student
 
 
 def go(request):
-    faculty = FacultyChoices.FRDCP
-    count = 350
-    hostel_id = 4
-    settlement(count=count, faculty=faculty, hostel_id=hostel_id)
     return render(request, 'hostels/rooms.html')
 
 
