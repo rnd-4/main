@@ -1,5 +1,6 @@
 {% extends 'hostels/layout.html' %}
 {% block title %}  Mainpage  page {% endblock %}
+{% load static %}
 {% block content %}
 <div class="d-flex justify-content-center row">
     <div class="mb-2"></div>
@@ -12,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
                             {% if dormitory.photo %}
-                            <img src={{ dormitory.photo}} class="card-img"
+                            <img src={% static dormitory.photo %} class="card-img"
                                  alt="hostel photo">
                             {% endif %}
                         </div>
