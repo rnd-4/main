@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -12,7 +11,8 @@ from django.contrib.auth.models import User
 from .models import Student, StatementRequest
 from hostels.models import Hostel, Room
 from django.contrib import messages
-from .arrays import regions, facultys
+from .arrays import *
+from .enums import *
 
 
 @login_required(login_url='./login')
@@ -48,7 +48,7 @@ def userPage(request):
         return HttpResponseRedirect(reverse('userpage'))
 
     student = Student.objects.get(user_id=request.user.id)
-    students = list(Student.objects.filter(room=student.room))
+    students = Student.objects.filter(room=student.room)
     statenebt_request = StatementRequest.objects.filter(user_id=request.user.id).first()
     if student.room:
         dormitory = Hostel.objects.get(id=student.room.hostel.id)
@@ -81,11 +81,42 @@ def userPage(request):
         'room': room,
         'payment_status': payment_status,
 
+        'genders': StudentGenderChoices,
         'facultys': facultys,
         'everage_score': everage_score,
         'regions': regions,
     }
     return render(request, 'users/userpage.html', data)
+
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'users/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('userpage')
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('login')
+
+
+def UserLoggedIn(request):
+    if request.user.is_authenticated == True:
+        username = request.user.username
+    else:
+        username = None
+    return username
+
+
+def Logout(request):
+    username = UserLoggedIn(request)
+    if username != None:
+        logout(request)
+        url_match = reverse_lazy('mainpage')
+        return redirect(url_match)
 
 
 def statement_request(request):
@@ -136,13 +167,14 @@ def admin_statement_requests(request):
 
     information = list()
     for settlement in statement_requests:
-        user = User.objects.get(id=settlement.user.id)
-        student = Student.objects.get(user_id=user.id)
-        information.append({
-            'user': user,
-            'student': student,
-            'statement': settlement,
-        })
+        if not settlement.approved:
+            user = User.objects.get(id=settlement.user.id)
+            student = Student.objects.get(user_id=user.id)
+            information.append({
+                'user': user,
+                'student': student,
+                'statement': settlement,
+            })
 
     data = {
         'information': information,
@@ -150,22 +182,48 @@ def admin_statement_requests(request):
     return render(request, 'users/admin_settlement_requests.html', data)
 
 
-def request_confirm(request,statement_id):
+def request_confirm(request, statement_id):
     statement = StatementRequest.objects.get(id=statement_id)
+    student = Student.objects.get(user_id=statement.user_id)
 
     hostels = Hostel.objects.all()
     hostels_data = []
 
     for hostel in hostels:
-        rooms =  Room.objects.filter(hostel=hostel).order_by('number')
+        rooms = Room.objects.filter(hostel=hostel).order_by('floor', 'number')
+        rooms_data = []
+
+        for room in rooms:
+            number_of_residents = Student.objects.filter(room=room).count()
+
+            id = room.id
+            number = room.number
+            floor = room.floor
+            price = room.price
+            room_type = room.room_type
+            gender = room.gender
+
+            rooms_data.append({
+                'id': id,
+                'number': number,
+                'floor': floor,
+                'price': price,
+                'room_type': room_type,
+                'gender': gender,
+
+                'number_of_residents': number_of_residents,
+            })
+
         hostels_data.append({
             'hostel': hostel,
-            'rooms': rooms,
+            'rooms': rooms_data,
         })
 
     data = {
         'hostels_data': hostels_data,
         'statement': statement,
+        'student': student,
+        'genders': StudentGenderChoices,
     }
 
     return render(request, 'users/request_confirm.html', data)
@@ -187,36 +245,65 @@ def students(request):
     }
     return render(request, 'users/students.html', data)
 
-class LoginUser(LoginView):
-    form_class = LoginUserForm
-    template_name = 'users/login.html'
 
-    def get_success_url(self):
-        return reverse_lazy('userpage')
-
-
-class RegisterUser(CreateView):
-    form_class = RegisterUserForm
-    template_name = 'users/register.html'
-    success_url = reverse_lazy('login')
+def rooms(request, id):
+    room = Room.objects.get(id=id)
+    hostel = Hostel.objects.get(id=room.hostel.id)
+    students = Student.objects.filter(room=room)
+    number_of_rooms = Room.objects.filter(hostel=hostel).count()
 
 
-def UserLoggedIn(request):
-    if request.user.is_authenticated == True:
-        username = request.user.username
-    else:
-        username = None
-    return username
+    data = {
+        'room': room,
+        'dormitory': hostel,
+        'students': students,
+        'number_of_rooms': number_of_rooms,
+    }
+    return render(request, 'users/room.html', data)
 
 
-def Logout(request):
-    username = UserLoggedIn(request)
-    if username != None:
-        logout(request)
-        url_match = reverse_lazy('mainpage')
-        return redirect(url_match)
+def dormitories(request):
+    hostels = Hostel.objects.all()
+    hostels_data = []
 
-def accept_request(request,statement_id,room_id):
+    for hostel in hostels:
+        rooms = Room.objects.filter(hostel=hostel).order_by('floor', 'number')
+        rooms_data = []
+
+        for room in rooms:
+            number_of_residents = Student.objects.filter(room=room).count()
+
+            id = room.id
+            number = room.number
+            floor = room.floor
+            price = room.price
+            room_type = room.room_type
+            gender = room.gender
+
+            rooms_data.append({
+                'id': id,
+                'number': number,
+                'floor': floor,
+                'price': price,
+                'room_type': room_type,
+                'gender': gender,
+
+                'number_of_residents': number_of_residents,
+            })
+
+        hostels_data.append({
+            'hostel': hostel,
+            'rooms': rooms_data,
+        })
+
+    data = {
+        'hostels_data': hostels_data,
+        'genders': StudentGenderChoices,
+    }
+    return render(request, 'users/dormitories.html', data)
+
+
+def accept_request(request, statement_id, room_id):
     statement = StatementRequest.objects.get(id=statement_id)
     room = Room.objects.get(id=room_id)
     student = Student.objects.get(user_id=statement.user.id)
@@ -229,7 +316,7 @@ def accept_request(request,statement_id,room_id):
     return HttpResponseRedirect(reverse('admin_settlement_requests'))
 
 
-def decline_request(request,id):
+def decline_request(request, id):
     statement = StatementRequest.objects.get(id=id)
     statement.delete()
     return HttpResponseRedirect(reverse('admin_settlement_requests'))

@@ -24,6 +24,9 @@
         </div>
     </div>
 </div>
+{% if not information %}
+<div class="alert alert-info text-center fs-5 mt-2" role="alert">Do not have any statement requests!</div>
+{% else %}
 {% for info in information %}
 {% if not info.statement.approved %}
 <div class="card">
@@ -59,8 +62,7 @@
         </div>
     </div>
 </div>
-{% else %}
-<div class="alert alert-info text-center fs-5 mt-2" role="alert">Do not have any statement requests!</div>
 {% endif %}
 {% endfor %}
+{% endif %}
 {% endblock %}

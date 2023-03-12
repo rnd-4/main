@@ -162,8 +162,13 @@
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
                             <select name="gender" id="gender" class="form-select" value={{ gender }}>
-                                <option>Male</option>
-                                <option>Female</option>
+                                {% for g in genders %}
+                                {% if g == gender %}
+                                <option selected>{{ g }}</option>
+                                {% else %}
+                                <option>{{ g }}</option>
+                                {% endif %}
+                                {% endfor %}
                             </select>
                         </div>
                     </fieldset>

@@ -1,3 +1,4 @@
+{% load static %}
 <div class="mb-2"></div>
 <div class="card bg-light mb-3">
     <div class="card-header "><h4>{{ dormitory.name }}</h4></div>
@@ -6,7 +7,7 @@
             <div class="col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <img src={{ dormitory.photo }} class="card-img"
+                        <img src={% static dormitory.photo %} class="card-img"
                              alt="hostel photo">
                     </div>
                 </div>
@@ -41,9 +42,9 @@
                 {% if dormitory.information %}
                 <div class="card mt-3">
                     <div class="card-body">
-
+                        
                         <div class="row">
-                            <h5 class="card-title">About my dormitory</h5>
+                            <h5 class="card-title">About dormitory</h5>
                             <p class="card-text">{{ dormitory.information }}</p>
                         </div>
                     </div>
@@ -55,7 +56,7 @@
             <div class="col-md-6">
                 <div name="room-information">
                     <div class="card bg-light" style="padding: 0;">
-                        <div class="card-header"><h4>My room</h4></div>
+                        <div class="card-header"><h4>Room</h4></div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between row">
                                 <div class="col-md-6">
@@ -81,14 +82,7 @@
                                     <hr>
                                 </div>
                             </div>
-                            <div>
-                                some information
-                            </div>
-                            <hr>
-                            <div>
-                                some information
-                            </div>
-                            <hr>
+                            {% if payment_status %}
                             <div class="col">
                                 <div class="row">
                                     <div class="d-flex justify-content-center">
@@ -105,6 +99,7 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                     {% for st in students %}
