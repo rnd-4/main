@@ -1,0 +1,68 @@
+{% extends 'users/administration.html' %}
+{% block title %} Requests {% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header h5">
+        <div class="row">
+            <div class="col">
+                Name
+            </div>
+            <div class="col">
+                Student id
+            </div>
+            <div class="col">
+                Primary residence
+            </div>
+            <div class="col">
+                Faculty
+            </div>
+            <div class="col">
+                Everage score
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+</div>
+{% if not information %}
+<div class="alert alert-info text-center fs-5 mt-2" role="alert">Do not have any statement requests!</div>
+{% else %}
+{% for info in information %}
+{% if not info.statement.approved %}
+<div class="card">
+    <div class="card-body ">
+        <div class="row">
+            <div class="col">
+                {{ info.user.first_name }} {{ info.user.last_name }}
+            </div>
+            <div class="col">
+                {{ info.user.username }}
+            </div>
+            <div class="col">
+                {{ info.student.location }}
+            </div>
+            <div class="col">
+                {{ info.student.faculty }}
+            </div>
+            <div class="col">
+                {{ info.student.everage_score }}
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'request_confirm' info.statement.id %}" type="button" class="btn btn-primary"
+                           style="width: 100%">Accept</a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'decline-request' info.statement.id %}" type="button" class="btn btn-danger"
+                           style="width: 100%">Decline</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'users/administration.html' %}
+{% block title %} confirm {% endblock %}
+{% block content %}
+
+{% for data in hostels_data %}
+<div class="card mt-2">
+    <div class="card-header"><h4>{{ data.hostel.name }}</h4></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card bg-opacity-25" style=" background-color:cyan">
+                    <div class="card-header p-2">Male</div>
+                    <div class="card-body">
+                        <div class="d-flex align-content-start flex-wrap">
+                            {%for room in data.rooms %}
+                            {% if room.gender == "Male" or room.gender == 'male' %}
+                            {% if room.number_of_residents < 3 %}
+                            <div style="padding:1px">
+                                <a href="{% url 'rooms' room.id %}">
+                                    <button type="button" class="btn btn-success">{{ room.number }}</button>
+                                </a>
+                            </div>
+                            {% elif room.number_of_residents == 3 %}
+                            <div style="padding:1px">
+                                <a href="{% url 'rooms' room.id %}">
+                                    <button type="button" class="btn btn-warning">{{ room.number }}</button>
+                                </a>
+                            </div>
+                            {% else %}
+                            <div style="padding:1px">
+                                <a href="{% url 'rooms' room.id %}">
+                                    <button type="button" class="btn btn-danger">{{ room.number}}</button>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card" style=" background-color:pink">
+                    <div class="card-header p-2">Female</div>
+                    <div class="card-body">
+                        <div class="d-flex align-content-start flex-wrap">
+                            {%for room in data.rooms %}
+                            {% if room.gender == "Female" or room.gender == 'female' %}
+                            {% if room.number_of_residents < 3 %}
+                            <div style="padding:1px">
+                                <a href="{% url 'rooms' room.id %}">
+                                    <button type="button" class="btn btn-success">{{ room.number }}</button>
+                                </a>
+                            </div>
+                            {% elif room.number_of_residents == 3 %}
+                            <div style="padding:1px">
+                                <a href="{% url 'rooms' room.id %}">
+                                    <button type="button" class="btn btn-warning">{{ room.number }}</button>
+                                </a>
+                            </div>
+                            {% else %}
+                            <div style="padding:1px">
+                                <a href="{% url 'rooms' room.id %}">
+                                    <button type="button" class="btn btn-danger">{{ room.number}}</button>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
