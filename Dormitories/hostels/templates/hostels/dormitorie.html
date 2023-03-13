@@ -1,9 +1,9 @@
 {% load static %}
 
-<div class="card">
+<div class="card mt-2">
     <div class="row">
         <div class="col-xl-6">
-            <div class="card-body pt-4 d-flex flex-column">
+            <div class="card-body pt-4 pb-0 d-flex flex-column">
                 <div class="card" style="padding: 12px;">
                     <div class="card-header"><h4>{{ dormitory.name }}</h4></div>
                     {% if dormitory.photo %}
@@ -33,18 +33,18 @@
             </div>
         </div>
         <div class="col-xl">
-            <div class="card-body pt-4 d-flex flex-column">
+            <div class="card-body pt-4 pb-0 d-flex flex-column">
                 <div class="card" style="padding: 12px;">
                     <div class="card-header"><h4>Кімната</h4></div>
                     <div class="row">
                         <div class="col-6">
                             <div class="card-body pt-4 d-flex flex-column align-items-center">
-                                <h4 class="card-header">№: {{ room.number }}</h4>
+                                <p class="card-header fs-5">№: {{ room.number }}</p>
                             </div>
                         </div>
                          <div class="col-6">
                              <div class="card-body pt-4 d-flex flex-column align-items-center">
-                                <h4 class="card-header">Поверх: {{ room.floor }}</h4>
+                                <p class="card-header fs-5">Поверх: {{ room.floor }}</p>
                             </div>
                         </div>
                     </div>
