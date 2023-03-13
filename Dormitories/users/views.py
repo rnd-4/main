@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth import logout, update_session_auth_hash
 
@@ -124,7 +124,7 @@ def UserLoggedIn(request):
         username = None
     return username
 
-
+@login_required
 def Logout(request):
     username = UserLoggedIn(request)
     if username != None:
@@ -132,7 +132,7 @@ def Logout(request):
         url_match = reverse_lazy('mainpage')
         return redirect(url_match)
 
-
+@login_required
 def statement_request(request):
     student = Student.objects.get(user_id=request.user.id)
 
@@ -175,7 +175,8 @@ def statement_request(request):
         statement_request.save()
         return HttpResponseRedirect(reverse('userpage'))
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def admin_statement_requests(request):
     statement_requests = StatementRequest.objects.filter()
 
@@ -195,7 +196,8 @@ def admin_statement_requests(request):
     }
     return render(request, 'users/admin_settlement_requests.html', data)
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def request_confirm(request, statement_id):
     statement = StatementRequest.objects.get(id=statement_id)
     student = Student.objects.get(user_id=statement.user_id)
@@ -242,7 +244,8 @@ def request_confirm(request, statement_id):
 
     return render(request, 'users/request_confirm.html', data)
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def students(request):
     students = Student.objects.filter()
 
@@ -259,7 +262,8 @@ def students(request):
     }
     return render(request, 'users/students.html', data)
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def rooms(request, id):
     room = Room.objects.get(id=id)
     hostel = Hostel.objects.get(id=room.hostel.id)
@@ -275,7 +279,8 @@ def rooms(request, id):
     }
     return render(request, 'users/room.html', data)
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def dormitories(request):
     hostels = Hostel.objects.all()
     hostels_data = []
@@ -316,7 +321,8 @@ def dormitories(request):
     }
     return render(request, 'users/dormitories.html', data)
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def accept_request(request, statement_id, room_id):
     statement = StatementRequest.objects.get(id=statement_id)
     room = Room.objects.get(id=room_id)
@@ -329,7 +335,8 @@ def accept_request(request, statement_id, room_id):
     statement.save()
     return HttpResponseRedirect(reverse('admin_settlement_requests'))
 
-
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def decline_request(request, id):
     statement = StatementRequest.objects.get(id=id)
     statement.delete()
