@@ -1,134 +1,86 @@
 {% load static %}
-<div class="mb-2"></div>
-<div class="card bg-light mb-3">
-    <div class="card-header "><h4>{{ dormitory.name }}</h4></div>
-    <div class="card-body">
-        <div class="d-flex justify-content-between row">
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <img src={% static dormitory.photo %} class="card-img"
-                             alt="hostel photo">
-                    </div>
+
+<div class="card">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card-body pt-4 d-flex flex-column">
+                <div class="card" style="padding: 12px;">
+                    <div class="card-header"><h4>{{ dormitory.name }}</h4></div>
+                    {% if dormitory.photo %}
+                            <img src={% static dormitory.photo %} class="card-img"
+                                 alt="hostel photo">
+                            {% endif %}
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    <p class="mb-0">Phone: </p>
-                                </div>
-                                <div class="col">
-                                    <p class="text-muted mb-0">{{ dormitory.phone }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="mb-0">Email: </p>
-                                </div>
-                                <div class="col">
-                                    <p class="text-muted mb-0">{{ dormitory.email }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col text-center">
-                                <h6><a href={{ dormitory.location }} class="mb-0"
-                                       style="text-decoration: none;">Location</a></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% if dormitory.information %}
-                <div class="card mt-3">
-                    <div class="card-body">
-                        
-                        <div class="row">
-                            <h5 class="card-title">About dormitory</h5>
+                <div class="card" style="padding: 12px;">
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Телефон:</div>
+                        <div class="col-lg-9 col-md-8">{{ dormitory.phone }}</div>
+                      </div>
+                        <hr>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Електронна пошта</div>
+                        <div class="col-lg-9 col-md-8">{{ dormitory.email }}</div>
+                      </div>
+                    <hr>
+                        <div class="card-body">
+                            <h5 class="card-title">Деталі:</h5>
                             <p class="card-text">{{ dormitory.information }}</p>
                         </div>
-                    </div>
                 </div>
-                {% else %}
-                <div class="mt-3 text-center"><p>Ooops no information</p></div>
-                {% endif %}
-            </div>
-            <div class="col-md-6">
-                <div name="room-information">
-                    <div class="card bg-light" style="padding: 0;">
-                        <div class="card-header"><h4>Room</h4></div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between row">
-                                <div class="col-md-6">
-                                    <div class="d-flex justify-content-center row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0 fs-4">№: </p>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <p class="text-muted mb-0 fs-4">{{ room.number }}</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex justify-content-center row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0 fs-4">Floor: </p>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <p class="text-muted mb-0 fs-4">{{ room.floor }}</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                            {% if payment_status %}
-                            <div class="col">
-                                <div class="row">
-                                    <div class="d-flex justify-content-center">
-                                        <p class="fs-3">Payment status</p>
-                                    </div>
-                                </div>
-                                <div class="row" style="padding:0px 12px">
-                                    {% if payment_status %}
-                                    <button href="#" type="button" class="btn btn-success"><p class="fs-4">You
-                                        good</p></button>
-                                    {% else %}
-                                    <button href="#" type="button" class="btn btn-danger"><p class="fs-4">Pay
-                                        now</p></button>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% for st in students %}
-                    <div class="card bg-light mt-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Full Name</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ st.user.first_name }}
-                                        {{st.user.last_name}}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Email</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ st.user.email }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+                <div class="card" style="padding: 12px;">
+                   <a href="{{ dormitory.location }}" target="_blank"><img class="card-img img-location" src="https://css-tianguis.com/wp-content/uploads/2020/03/google-maps-links.png"></a>
                 </div>
             </div>
         </div>
+        <div class="col-xl">
+            <div class="card-body pt-4 d-flex flex-column">
+                <div class="card" style="padding: 12px;">
+                    <div class="card-header"><h4>Кімната</h4></div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card-body pt-4 d-flex flex-column align-items-center">
+                                <h4 class="card-header">№: {{ room.number }}</h4>
+                            </div>
+                        </div>
+                         <div class="col-6">
+                             <div class="card-body pt-4 d-flex flex-column align-items-center">
+                                <h4 class="card-header">Поверх: {{ room.floor }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for st in students %}
+                <div class="card" style="padding: 12px;">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Повне ім'я</div>
+                        <div class="col-lg-9 col-md-8">{{ st.user.first_name }} {{st.user.last_name}}</div>
+                      </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Електронна пошта</div>
+                        <div class="col-lg-9 col-md-8">{{ st.user.email }}</div>
+                    </div>
+                </div>
+                 {% endfor %}
+            </div>
+        </div>
     </div>
+        {% if payment_status %}
+            <div class="col">
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <p class="fs-3">Payment status</p>
+                    </div>
+                </div>
+                <div class="row" style="padding:0px 12px">
+                    {% if payment_status %}
+                    <button href="#" type="button" class="btn btn-success"><p class="fs-4">You
+                        good</p></button>
+                    {% else %}
+                    <button href="#" type="button" class="btn btn-danger"><p class="fs-4">Pay
+                        now</p></button>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
 </div>
-
