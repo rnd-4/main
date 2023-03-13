@@ -1,7 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.contrib.auth.views import PasswordChangeView
 from django.core.exceptions import ValidationError
+from django.urls import reverse_lazy
+
 from .models import Student
 
 
@@ -93,3 +96,8 @@ class LoginUserForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = 'myapp/password_change.html'
+    success_url = reverse_lazy('myapp:password_change_done')
