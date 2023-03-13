@@ -1,8 +1,9 @@
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 
 from .forms import LoginUserForm, RegisterUserForm
 from django.urls import reverse_lazy, reverse
@@ -21,31 +22,44 @@ def userPage(request):
         return HttpResponseRedirect(reverse('admin_settlement_requests'))
 
     if request.method == 'POST':
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
-        faculty = request.POST['faculty']
-        gender = request.POST['gender']
-        location = request.POST['location']
-        everage_score = request.POST['everage_score']
+        if "change_user_data" in request.POST:
+            firstname = request.POST['firstname']
+            lastname = request.POST['lastname']
+            faculty = request.POST['faculty']
+            gender = request.POST['gender']
+            location = request.POST['location']
+            everage_score = request.POST['everage_score']
 
-        username = request.user.username
-        user = User.objects.get(username=username)
-        user_id = request.user.id
+            username = request.user.username
+            user = User.objects.get(username=username)
+            user_id = request.user.id
 
-        student = Student.objects.get(user_id=user_id)
-        if not student:
-            Student.objects.create(gender=gender, faculty=faculty, user_id=user_id)
-        else:
-            student.gender = gender
-            student.faculty = faculty
-            student.location = location
-            student.everage_score = everage_score
-            student.save()
+            student = Student.objects.get(user_id=user_id)
+            if not student:
+                Student.objects.create(gender=gender, faculty=faculty, user_id=user_id)
+            else:
+                student.gender = gender
+                student.faculty = faculty
+                student.location = location
+                student.everage_score = everage_score
+                student.save()
 
-        user.first_name = firstname
-        user.last_name = lastname
-        user.save()
-        return HttpResponseRedirect(reverse('userpage'))
+            user.first_name = firstname
+            user.last_name = lastname
+            user.save()
+            return HttpResponseRedirect(reverse('userpage'))
+        elif "change_password" in request.POST:
+            form = PasswordChangeForm(request.user, request.POST)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)  # don't log out the user
+                messages.success(request, "Password changed.")
+                print("Password changed to " + request.user.password)
+                return redirect('userpage')  # or any other page
+            else:
+                messages.error(request, "Password change failed.")
+                print("Password change failed.")
+                return redirect('userpage')
 
     student = Student.objects.get(user_id=request.user.id)
     students = Student.objects.filter(room=student.room)

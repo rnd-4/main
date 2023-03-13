@@ -172,7 +172,7 @@
                                 </div>
                                 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" class="save">Зберегти</button>
+                                    <button type="submit" class="btn btn-primary" class="save" name="change_user_data">Зберегти</button>
                                 </div>
                             </form><!-- End Profile Edit Form -->
                         </div>
@@ -182,33 +182,33 @@
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <div class="row mb-3">
-                                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Поточний
+                                    <label for="old_password" class="col-md-4 col-lg-3 col-form-label">Поточний
                                         пароль</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="password" type="password" class="form-control"
-                                               id="currentPassword">
+                                        <input name="old_password" type="password" class="form-control"
+                                               id="old_password">
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Новий
+                                    <label for="new_password1" class="col-md-4 col-lg-3 col-form-label">Новий
                                         пароль</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                                        <input name="new_password1" type="password" class="form-control" id="new_password1">
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Повтор нового
+                                    <label for="new_password2" class="col-md-4 col-lg-3 col-form-label">Повтор нового
                                         паролю</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="renewpassword" type="password" class="form-control"
-                                               id="renewPassword">
+                                        <input name="new_password2" type="password" class="form-control"
+                                               id="new_password2">
                                     </div>
                                 </div>
                                 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Змінити пароль</button>
+                                    <button type="submit" class="btn btn-primary" name="change_password">Змінити пароль</button>
                                 </div>
                             </form><!-- End Change Password Form -->
                         
