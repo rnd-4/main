@@ -96,8 +96,3 @@ class LoginUserForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
-
-
-class MyPasswordChangeView(PasswordChangeView):
-    template_name = 'myapp/password_change.html'
-    success_url = reverse_lazy('myapp:password_change_done')
