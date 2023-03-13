@@ -72,7 +72,7 @@
 <body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-
+    <div class="container d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
       <a href="/" class="logo d-flex align-items-center">
 {#        <img src="assets/img/logo.png" alt="">#}
@@ -80,7 +80,7 @@
       </a>
     </div><!-- End Logo -->
 
-        <a class="nav-link " href="/" style="margin-right: 50px;">
+        <a class="nav-link " href="/" style="margin-right: 30px;">
           <i class="bi bi-grid"></i>
           <span>Головна</span>
         </a>
@@ -245,7 +245,7 @@
           </ul><!-- End Messages Dropdown Items -->
 
         </li><!-- End Messages Nav -->{% endcomment %}
-        <li class="nav-item dropdown pe-3">
+        <li class="nav-item dropdown pe-3" style="margin-right: 20px;">
 {% if request.user.is_authenticated %}
               <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
               {% if not gender %}
@@ -292,7 +292,7 @@
 {% endif %}
       </ul>
     </nav><!-- End Icons Navigation -->
-
+    </div>
   </header><!-- End Header -->
   <div class="modal fade" id="logoutModal" tabindex="-1">
                 <div class="modal-dialog">
