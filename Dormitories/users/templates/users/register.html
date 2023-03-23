@@ -39,7 +39,7 @@
 
                         <div class="d-flex justify-content-center py-3">
                             <a href="/" class="logo d-flex align-items-center w-auto">
-                                <span class="d-none d-lg-block">Гуртожитки</span>
+                                <span class="d-none d-lg-block">Dormitories</span>
                             </a>
                         </div>
 
@@ -48,63 +48,64 @@
                             <div class="card-body">
 
                                 <div class="pt-4 pb-2">
-                                    <h5 class="card-title text-center pb-6 fs-4">Реєстрація</h5>
+                                    <h5 class="card-title text-center pb-6 fs-4">Registration</h5>
                                 </div>
 
                                 <form class="row g-3 needs-validation" method="post" novalidate>
                                     {% csrf_token %}
                                     <div class="col-xl-6 col-md-6">
-                                        <label for="typeFirstName" class="form-label">Ім'я</label>
+                                        <label for="typeFirstName" class="form-label">First name</label>
                                         {{ form.first_name }}
-                                        <div class="invalid-feedback">Будь ласка, введи своє ім'я!</div>
+                                        <div class="invalid-feedback">Please enter your first name!</div>
                                     </div>
                                     <div class="col-xl-6 col-md-6">
-                                        <label for="typeLastName" class="form-label">Прізвище</label>
+                                        <label for="typeLastName" class="form-label">Last name</label>
                                         {{ form.last_name }}
-                                        <div class="invalid-feedback">Будь ласка, введи своє прізвище!</div>
+                                        <div class="invalid-feedback">lease enter your last name!</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="typeEmailX" class="form-label">Електронна пошта</label>
+                                        <label for="typeEmailX" class="form-label">Email</label>
                                         {{form.email}}
-                                        <div class="invalid-feedback">Введи електронну пошту!</div>
+                                        <div class="invalid-feedback">Enter your email!</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="typeUsernameX" class="form-label">Номер студентського</label>
+                                        <label for="typeUsernameX" class="form-label">Student number</label>
                                         <div class="input-group has-validation">
                                             {{form.username}}
-                                            <div class="invalid-feedback">Введи номер студентського.</div>
+                                            <div class="invalid-feedback">Enter your student number.</div>
+                                            <div class="invalid-feedback">For example 12345678.</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="typePassword1" class="form-label">Пароль</label>
+                                        <label for="typePassword1" class="form-label">Password</label>
                                         {{form.password1}}
-                                        <div class="invalid-feedback">Вигадай пароль!</div>
+                                        <div class="invalid-feedback">Create Password</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="typePassword2" class="form-label">Повтори пароль</label>
+                                        <label for="typePassword2" class="form-label">Repeat password</label>
                                         {{form.password2}}
-                                        <div class="invalid-feedback">Пароль не сходиться!</div>
+                                        <div class="invalid-feedback">Password does not match!</div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" name="terms" type="checkbox" value=""
                                                    id="acceptTerms" required>
-                                            <label class="form-check-label" for="acceptTerms">Я погоджуюсь та приймаю <a
-                                                    href="#">умови та правила</a></label>
-                                            <div class="invalid-feedback">Маєте підтвердити умови та правила.</div>
+                                            <label class="form-check-label" for="acceptTerms">I agree and accept <a
+                                                    href="#">terms and conditions</a></label>
+                                            <div class="invalid-feedback">You must confirm the terms and conditions.</div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Зареєструватися</button>
+                                        <button class="btn btn-primary w-100" type="submit">Registration</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Вже маєш аккаунт? <a
-                                                href="/login?next=/userpage">Увійти</a></p>
+                                        <p class="small mb-0">Have an account? <a
+                                                href="/login?next=/userpage">Log in</a></p>
                                     </div>
                                 </form>
 

@@ -85,7 +85,7 @@
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
               <div class="d-flex justify-content-center py-3">
                 <a href="/" class="logo d-flex align-items-center w-auto">
-                  <span class="d-none d-lg-block">Гуртожитки</span>
+                  <span class="d-none d-lg-block">Dormitories</span>
                 </a>
               </div><!-- End Logo -->
 
@@ -94,36 +94,36 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-3">
-                    <h5 class="card-title text-center pb-0 fs-4">Вхід</h5>
+                    <h5 class="card-title text-center pb-0 fs-4">Log in</h5>
                   </div>
 
                   <form class="row g-3 needs-validation" method="post" novalidate>
                     {% csrf_token %}
                     <div class="col-12">
-                      <label for="typeUsernameX" class="form-label">Номер студентського</label>
+                      <label for="typeUsernameX" class="form-label">Student Number</label>
                       <div class="input-group has-validation">
                         {{ form.username }}
-                        <div class="invalid-feedback">Будь ласка, введи номер студентського.</div>
+                        <div class="invalid-feedback">Please enter your student number.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="typePasswordX" class="form-label">Пароль</label>
+                      <label for="typePasswordX" class="form-label">Password</label>
                       {{ form.password }}
-                      <div class="invalid-feedback">Будь ласка, введи пароль!</div>
+                      <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
                     <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Запам'ятати мене</label>
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Увійти</button>
+                      <button class="btn btn-primary w-100" type="submit">Log in</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Не маєш аккаунта? <a href="/register">Реєстрація</a></p>
+                      <p class="small mb-0">Do not have an account? <a href="/register">RegistrationF</a></p>
                     </div>
                   </form>
                 </div>

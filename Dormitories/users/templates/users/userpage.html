@@ -4,7 +4,7 @@
 <section class="section profile">
     <div class="row">
         <div class="col-xl-4 mt-3">
-            <div class="card" style="height:100%">
+            <div class="card" {% if room %} style="height:100%" {% endif %}>
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     {% if not gender %}
                     <img src="https://th.bing.com/th/id/R.cec69a569d2d2224a738afb5ad8a419f?rik=VFoqor%2bvcZqRHA&riu=http%3a%2f%2fronaldmottram.co.nz%2fwp-content%2fuploads%2f2019%2f01%2fdefault-user-icon-8.jpg&ehk=KdwKcNMijBB2LcdEzKdT%2bIvtpFWIKQT2HetK7wCogdA%3d&risl=&pid=ImgRaw&r=0"
@@ -20,9 +20,9 @@
                     <h5 class="my-3">ID №: <span style="color:rgba(52,83,200,0.57);">{{ username }}</span></h5>
 
                     {% if not statement_request and not room %}
-                    <a href="{% url 'request' %}" class="btn btn-success btn-sm">Запит на поселення</a>
+                    <a href="{% url 'request' %}" class="btn btn-success btn-sm">Settlement request</a>
                     {% elif not statement_request.approved and not room %}
-                    <div class="alert alert-primary" role="alert">Запит на поселення в опрацюванні</div>
+                    <div class="alert alert-primary" role="alert">Your settlement request is being processed</div>
                     {% endif %}
                     
                     {% if messages %}
@@ -45,18 +45,18 @@
                         
                         <li class="nav-item">
                             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">
-                                Опис
+                                Description
                             </button>
                         </li>
                         
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Редагувати
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
                             </button>
                         </li>
                         
                         <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">
-                                Змінити пароль
+                                Change password
                             </button>
                         </li>
                     
@@ -67,32 +67,32 @@
                     <pre>
                     </pre>
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label ">Повне ім'я</div>
+                                <div class="col-lg-3 col-md-4 label ">Full name</div>
                                 <div class="col-lg-9 col-md-8">{{ firstname }} {{ lastname }}</div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Електронна пошта</div>
+                                <div class="col-lg-3 col-md-4 label">Email</div>
                                 <div class="col-lg-9 col-md-8">{{ email }}</div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Регіон</div>
+                                <div class="col-lg-3 col-md-4 label">Primary Location</div>
                                 <div class="col-lg-9 col-md-8">{{ location }}</div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Стать</div>
+                                <div class="col-lg-3 col-md-4 label">Sex</div>
                                 <div class="col-lg-9 col-md-8">{{ gender }}</div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Факультет</div>
+                                <div class="col-lg-3 col-md-4 label">Faculty</div>
                                 <div class="col-lg-9 col-md-8">{{ faculty }}</div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Середній бал</div>
+                                <div class="col-lg-3 col-md-4 label">Average score</div>
                                 <div class="col-lg-9 col-md-8">{{ everage_score }}</div>
                             </div>
                         </div>
@@ -104,21 +104,21 @@
                                 {% csrf_token %}
                                 
                                 <div class="row mb-3">
-                                    <label for="firstname" class="col-md-4 col-lg-3 col-form-label">Ім'я</label>
+                                    <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First name</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="firstname" id="firstname" class="form-control" value={{ firstname }}>
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Прізвище</label>
+                                    <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last name</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="lastname" id="lastname" class="form-control" value={{ lastname }}>
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Факультет</label>
+                                    <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Faculty</label>
                                     <div class="col-md-8 col-lg-9">
                                         <select name="faculty" id="faculty" class="form-select">
                                             {% for f in facultys %}
@@ -133,7 +133,7 @@
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="location" class="col-md-4 col-lg-3 col-form-label">Регіон</label>
+                                    <label for="location" class="col-md-4 col-lg-3 col-form-label">Primary Location</label>
                                     <div class="col-md-8 col-lg-9">
                                         <select name="location" id="location" class="form-select" value={{ location }}>
                                             {% for region in regions %}
@@ -148,7 +148,7 @@
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="gender" class="col-md-4 col-lg-3 col-form-label">Стать</label>
+                                    <label for="gender" class="col-md-4 col-lg-3 col-form-label">Sex</label>
                                     <div class="col-md-8 col-lg-9">
                                         <select name="gender" id="gender" class="form-select" value={{ gender }}>
                                             {% for g in genders %}
@@ -163,8 +163,7 @@
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="everage_score" class="col-md-4 col-lg-3 col-form-label">Середній
-                                        бал</label>
+                                    <label for="everage_score" class="col-md-4 col-lg-3 col-form-label">Average score</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="everage_score" id="everage_score" class="form-control"
                                                value={{ everage_score }}>
@@ -172,7 +171,7 @@
                                 </div>
                                 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" class="save" name="change_user_data">Зберегти</button>
+                                    <button type="submit" class="btn btn-primary" class="save" name="change_user_data">Save</button>
                                 </div>
                             </form><!-- End Profile Edit Form -->
                         </div>
@@ -182,8 +181,7 @@
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <div class="row mb-3">
-                                    <label for="old_password" class="col-md-4 col-lg-3 col-form-label">Поточний
-                                        пароль</label>
+                                    <label for="old_password" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="old_password" type="password" class="form-control"
                                                id="old_password">
@@ -191,16 +189,14 @@
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="new_password1" class="col-md-4 col-lg-3 col-form-label">Новий
-                                        пароль</label>
+                                    <label for="new_password1" class="col-md-4 col-lg-3 col-form-label">New password</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="new_password1" type="password" class="form-control" id="new_password1">
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="new_password2" class="col-md-4 col-lg-3 col-form-label">Повтор нового
-                                        паролю</label>
+                                    <label for="new_password2" class="col-md-4 col-lg-3 col-form-label">Repeat new password</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="new_password2" type="password" class="form-control"
                                                id="new_password2">
@@ -208,7 +204,7 @@
                                 </div>
                                 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" name="change_password">Змінити пароль</button>
+                                    <button type="submit" class="btn btn-primary" name="change_password">Change password</button>
                                 </div>
                             </form><!-- End Change Password Form -->
                         
