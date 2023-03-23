@@ -272,7 +272,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="{% url 'userpage' %}">
                 <i class="bi bi-person"></i>
-                <span>Профіль</span>
+                <span>Profile</span>
               </a>
             </li>
             <li>
@@ -281,14 +281,14 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Вийти</span>
+                <span>Log out</span>
               </a>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
 {% else %}
-        <a href="{% url 'login' %}"> <button type="button" class="btn btn-primary">Увійти</button></a>
+        <a href="{% url 'login' %}"> <button type="button" class="btn btn-primary">Log in</button></a>
 {% endif %}
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -298,15 +298,15 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Вихід</h5>
+                      <h5 class="modal-title">Log out</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Точно бажаєш вийти із системи?
+                        Are you sure you want to log out?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ні</button>
-                        <a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Так, вийти</button></a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Yes</button></a>
                     </div>
                   </div>
                 </div>
